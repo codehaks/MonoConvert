@@ -5,7 +5,14 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>mono-convert</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    
   </PropertyGroup>
+
+
 
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="8.0.0-preview.7.23375.5" />
