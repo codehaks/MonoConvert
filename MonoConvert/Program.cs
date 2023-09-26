@@ -8,25 +8,20 @@ var files = System.IO.Directory.GetFiles(@"F:\pics\");
 
 
 
-var listOfTasks=new List<Task>();
+var listOfTasks = new List<Task>();
 
 foreach (var file in files)
 {
-    var task= ConvertAsync(file);
+    var task = ConvertAsync(file);
     listOfTasks.Add(task);
 }
 
- Task.WhenAll(listOfTasks);
+await Task.WhenAll(listOfTasks);
 
 Console.WriteLine("All files processed.");
 
 
-while (true)
-{
-    await Task.Delay(1000);
-    Console.WriteLine("I'm working!");
 
-}
 
 #pragma warning disable CA1416 // Validate platform compatibility
 static async Task ConvertAsync(string path)
@@ -36,15 +31,14 @@ static async Task ConvertAsync(string path)
     // Create a new Bitmap with the same dimensions as the original image
     using var blackAndWhiteImage = new Bitmap(originalImage.Width, originalImage.Height);
 
-    Console.WriteLine("Processing Image {0} started.",path);
+    //Console.WriteLine("Processing Image {0} started.", path);
 
     // Loop through each pixel in the original image
     for (int x = 0; x < originalImage.Width; x++)
     {
-        await Task.Delay(new Random().Next(1, 10));
         for (int y = 0; y < originalImage.Height; y++)
         {
-            
+
             // Get the color of the current pixel in the original image
             Color pixelColor = originalImage.GetPixel(x, y);
 
@@ -57,7 +51,7 @@ static async Task ConvertAsync(string path)
             // Set the pixel in the black and white image to the grayscale color
             blackAndWhiteImage.SetPixel(x, y, grayColor);
 
-           
+
         }
     }
 
@@ -72,9 +66,9 @@ static async Task ConvertAsync(string path)
     // Do something with the MemoryStream (e.g., send it over the network or save to another location)
     // memoryStream.ToArray() contains the image data as bytes
 
-    var fileInfo=new FileInfo(path);
+    var fileInfo = new FileInfo(path);
 
-    string outputPath = Path.Combine(fileInfo.Directory.FullName, Path.GetFileNameWithoutExtension(fileInfo.Name) + "-output"+fileInfo.Extension);
+    string outputPath = Path.Combine(fileInfo.Directory.FullName, "output-"+Path.GetFileNameWithoutExtension(fileInfo.Name) + fileInfo.Extension);
 
     // Save the MemoryStream to disk asynchronously
     await SaveMemoryStreamToFileAsync(memoryStream, outputPath);
