@@ -4,7 +4,12 @@ using System.Drawing.Imaging;
 
 Console.WriteLine("Hello, World!");
 
-var files = System.IO.Directory.GetFiles(@"F:\pics\");
+if (args.Length<=0)
+{
+    Console.WriteLine("No path found.");
+}
+
+var files = System.IO.Directory.GetFiles(args[0]);
 
 
 
