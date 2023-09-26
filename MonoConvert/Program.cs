@@ -6,7 +6,7 @@ Console.WriteLine("Hello, World!");
 
 var files = System.IO.Directory.GetFiles(@"F:\pics\");
 
-Task.Run(async () => { 
+
 
 var listOfTasks=new List<Task>();
 
@@ -16,10 +16,10 @@ foreach (var file in files)
     listOfTasks.Add(task);
 }
 
-await Task.WhenAll(listOfTasks);
+ Task.WhenAll(listOfTasks);
 
 Console.WriteLine("All files processed.");
-});
+
 
 while (true)
 {
